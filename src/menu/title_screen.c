@@ -3,6 +3,7 @@
 #include "audio/external.h"
 #include "engine/math_util.h"
 #include "game/area.h"
+#include "file_select.h"
 #include "game/game_init.h"
 #include "game/level_update.h"
 #include "game/main.h"
@@ -186,11 +187,21 @@ s32 intro_regular(void) {
         sPlayMarioGreeting = FALSE;
     }
     print_intro_text();
+
+    if (gPlayer1Controller->buttonPressed & D_CBUTTONS)
+    {
+        play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(4, SEQ_EVENT_HIGH_SCORE), 2);
+    }
 #ifdef DEBUG_LEVEL_SELECT
     if (gPlayer1Controller->buttonDown & L_TRIG) {
         gDebugLevelSelect = TRUE;
     }
 #endif
+
+    if (gPlayer1Controller->buttonDown & U_CBUTTONS) {
+        level = LEVEL_BOB;
+    }
+
     if (gPlayer1Controller->buttonPressed & START_BUTTON) {
         play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
 #if ENABLE_RUMBLE

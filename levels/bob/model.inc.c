@@ -4,6 +4,7 @@
 
 
 
+
 Vtx bob_dl_Cube_mesh_layer_1_vtx_0[96] = {
 	{{ {-414, -97, 398}, 0, {368, 1008}, {185, 153, 25, 255} }},
 	{{ {-505, 0, 485}, 0, {496, 1008}, {185, 153, 25, 255} }},
@@ -1086,6 +1087,20 @@ Gfx bob_dl_Cube_005_mesh_layer_1_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
+Vtx bob_dl_DEATHPLANE_mesh_layer_5_vtx_0[4] = {
+	{{ {-7000, 0, 7000}, 0, {-16, 1008}, {0, 127, 0, 255} }},
+	{{ {7000, 0, 7000}, 0, {1008, 1008}, {0, 127, 0, 255} }},
+	{{ {7000, 0, -7000}, 0, {1008, -16}, {0, 127, 0, 255} }},
+	{{ {-7000, 0, -7000}, 0, {-16, -16}, {0, 127, 0, 255} }},
+};
+
+Gfx bob_dl_DEATHPLANE_mesh_layer_5_tri_0[] = {
+	gsSPVertex(bob_dl_DEATHPLANE_mesh_layer_5_vtx_0 + 0, 4, 0),
+	gsSP1Triangle(0, 1, 2, 0),
+	gsSP1Triangle(0, 2, 3, 0),
+	gsSPEndDisplayList(),
+};
+
 Gfx mat_bob_dl_f3dlite_material[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
@@ -1140,6 +1155,15 @@ Gfx mat_bob_dl_f3dlite_material_005[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_bob_dl_f3dlite_material_006[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, 0, 0, 0, 0, SHADE, 0, 0, 0, 0),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
+	gsSPEndDisplayList(),
+};
+
 Gfx bob_dl_Cube_mesh_layer_1[] = {
 	gsSPDisplayList(mat_bob_dl_f3dlite_material),
 	gsSPDisplayList(bob_dl_Cube_mesh_layer_1_tri_0),
@@ -1173,6 +1197,12 @@ Gfx bob_dl_Cube_004_mesh_layer_1[] = {
 Gfx bob_dl_Cube_005_mesh_layer_1[] = {
 	gsSPDisplayList(mat_bob_dl_f3dlite_material_005),
 	gsSPDisplayList(bob_dl_Cube_005_mesh_layer_1_tri_0),
+	gsSPEndDisplayList(),
+};
+
+Gfx bob_dl_DEATHPLANE_mesh_layer_5[] = {
+	gsSPDisplayList(mat_bob_dl_f3dlite_material_006),
+	gsSPDisplayList(bob_dl_DEATHPLANE_mesh_layer_5_tri_0),
 	gsSPEndDisplayList(),
 };
 

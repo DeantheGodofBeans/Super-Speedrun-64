@@ -108,6 +108,8 @@ s32 act_idle(struct MarioState *m) {
         return set_mario_action(m, ACT_IN_QUICKSAND, 0);
     }
 
+    mario_boost_build(m);
+
     if (m->input & INPUT_IN_POISON_GAS) {
         return set_mario_action(m, ACT_COUGHING, 0);
     }

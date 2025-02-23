@@ -27,5 +27,6 @@
  * Ensure that the warp exists, or else the game will crash.
  */
 #define EXIT_COURSE_LEVEL LEVEL_CASTLE
+#define EXIT_GAME_LEVEL LEVEL_RESTART_GAME
 #define EXIT_COURSE_AREA 0x01
 #define EXIT_COURSE_NODE 0x1F

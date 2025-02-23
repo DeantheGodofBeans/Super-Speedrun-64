@@ -1,6 +1,7 @@
 #include <PR/ultratypes.h>
 
 #include "sm64.h"
+#include "print.h"
 #include "mario_actions_moving.h"
 #include "mario_actions_object.h"
 #include "mario_actions_airborne.h"
@@ -14,6 +15,7 @@
 #include "memory.h"
 #include "behavior_data.h"
 #include "rumble_init.h"
+#include "game/game_init.h"
 
 #include "config.h"
 
@@ -444,6 +446,8 @@ void update_walking_speed(struct MarioState *m) {
     if (m->forwardVel > 48.0f) {
         m->forwardVel = 48.0f;
     }
+
+    mario_boost_build(m);
 
 #ifdef VELOCITY_BASED_TURN_SPEED
     if ((m->heldObj == NULL) && !(m->action & ACT_FLAG_SHORT_HITBOX)) {
@@ -1098,6 +1102,7 @@ s32 act_decelerating(struct MarioState *m) {
     if (update_decelerating_speed(m)) {
         return set_mario_action(m, ACT_IDLE, 0);
     }
+
 
     switch (perform_ground_step(m)) {
         case GROUND_STEP_LEFT_GROUND:

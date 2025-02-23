@@ -31,10 +31,6 @@
     "09_level_slide": [
         "0D"
     ],
-    "0A_level_spooky": [
-        "10",
-        "21"
-    ],
     "0B_event_piranha_plant": [
         "14_piranha_music_box"
     ],
@@ -125,5 +121,11 @@
     ],
     "23_question_mark": [
         "question_mark"
+    ],
+    "0A_level_spooky": [
+        "ghostly_ghost_house"
+    ],
+    "24_mario_kart_wii_options": [
+        "mario_kart_wii_options"
     ]
 }

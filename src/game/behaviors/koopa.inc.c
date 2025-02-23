@@ -504,6 +504,8 @@ static void koopa_the_quick_act_show_init_text(void) {
     s32 response = obj_update_race_proposition_dialog(
         sKoopaTheQuickProperties[o->oKoopaTheQuickRaceIndex].initText);
 
+        play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(4, SEQ_QUESTION_MARK), 0);
+
     if (response == DIALOG_RESPONSE_YES) {
         gMarioShotFromCannon = FALSE;
         o->oAction = KOOPA_THE_QUICK_ACT_RACE;

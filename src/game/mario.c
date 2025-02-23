@@ -33,6 +33,8 @@
 #include "sound_init.h"
 #include "rumble_init.h"
 
+static u16 MarioCanMove = TRUE;
+
 /**************************************************
  *                    ANIMATIONS                  *
  **************************************************/
@@ -360,6 +362,9 @@ void play_mario_sound(struct MarioState *m, s32 actionSound, s32 marioSound) {
  *                     ACTIONS                    *
  **************************************************/
 
+
+
+
 /**
  * Sets Mario's other velocities from his forward speed.
  */
@@ -371,6 +376,60 @@ void mario_set_forward_vel(struct MarioState *m, f32 forwardVel) {
 
     m->vel[0] = (f32) m->slideVelX;
     m->vel[2] = (f32) m->slideVelZ;
+}
+
+void mario_boost_build(struct MarioState *m)
+{
+
+    if (m->forwardVel > 30.0f)
+    {
+        if (m->boostBuildup < 100 & !m->inBoost)
+        {
+            m->boostBuildup += 0.05f;
+        }
+    }
+
+    if (gPlayer1Controller->buttonDown & L_TRIG)
+    {
+        if (m->boostBuildup >= 70 || m->canBoost)
+        {
+            m->inBoost = TRUE;
+        }
+    }
+    else
+    {
+        m->inBoost = FALSE;
+    }
+
+    if (m->inBoost)
+    {
+        m->canBoost = TRUE;
+
+        //m->faceAngle[1] = m->intendedYaw;
+
+        if (m->forwardVel > 2)
+        {
+            m->forwardVel = 40.0f;
+            m->boostBuildup -= 0.2f;
+        }
+        else if (m->forwardVel < 0)
+        {
+            m->forwardVel = -25.0f;
+            m->boostBuildup -= 0.2f;
+        }
+        else
+        {
+            m->inBoost = FALSE;
+        }
+    }
+
+    if (m->boostBuildup <= 0)
+    {
+        m->canBoost = FALSE;
+        
+        m->inBoost = FALSE;
+        m->boostBuildup = 0;
+    }
 }
 
 /**
@@ -1815,10 +1874,13 @@ void init_mario(void) {
     }
 
     gMarioState->forwardVel = 0.0f;
+    gMarioState->boostBuildup = 0.0f;
     gMarioState->squishTimer = 0;
 
     gMarioState->hurtCounter = 0;
     gMarioState->healCounter = 0;
+
+    gMarioState->inBoost = FALSE;
 
     gMarioState->capTimer = 0;
     gMarioState->quicksandDepth = 0.0f;
